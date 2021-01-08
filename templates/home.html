@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title> Polling app </title>
+    </head>
+    <body>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li> {{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <h1> Welcome {{name}} </h1>
+        <a href="/giveVote/"> Give Vote </a>
+        <br>
+        <a href="/createPoll/"> Create Poll </a>
+        <br>
+        <a href="/viewVoters/"> View Voters </a>
+        <br>
+        <a href="/viewCreatedPoll/"> View Created Poll </a>
+        <br>
+        <a href="/deletePoll/"> Delete Poll </a>
+        <br>
+        <a href="/logout/"> Log out </a>
+    </body>
+</html>

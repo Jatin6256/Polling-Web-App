@@ -1,0 +1,15 @@
+<html>
+   <head>
+   <title> Polling app </title>
+   </head>
+   <body>
+      {% if error %}
+         <p><strong>Error:</strong> {{ error }}
+      {% endif %}
+      <h1> Enter poll_id </h1>
+      <form action = "/deletePoll/" method = "get">
+         <p><input type = "text" name = "poll_id" /></p>
+         <p><input type = "submit" value = "submit" /></p>
+      </form>
+   </body>
+</html>

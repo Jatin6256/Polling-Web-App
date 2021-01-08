@@ -1,0 +1,36 @@
+<html>
+   <head>
+   <title> Polling app </title>
+   </head>
+   <body>
+      {% if error %}
+         <p><strong>Error:</strong> {{ error }}
+      {% endif %}
+      <form id="poll"action = "/createPoll/" method = "post">
+         <p>Enter Question:</p>
+         <p><input type = "text" name = "que" /></p>
+         <p>Enter Options:</p>
+         <div id='options'>
+            <p><input type = "text" name = "op1" /></p>
+            <p><input type = "text" name = "op2" /></p>
+         </div>
+         <p><input type = "submit" value = "submit" /></p>
+
+      </form>
+      <button type="button" onclick="add()"> Add More Options </button>
+      <script>
+         function add(){
+            var added = document.createElement('p');
+            var input = document.createElement('input');
+            var count = document.getElementById('options').childElementCount;
+            count = count + 1; 
+            input.setAttribute('type','text');
+            input.setAttribute('name','op'+ count);
+            added.appendChild(input);
+            document.getElementById('options').appendChild(added);
+
+         }
+      </script>
+
+   </body>
+</html>

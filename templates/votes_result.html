@@ -1,0 +1,64 @@
+<html>
+   <head>
+   <title> Polling app </title>
+   </head>
+   <body>
+   <h1 id='errMsg'>  </h1>
+   <h1> {{ question }} </h1>
+    {% for option in options %}
+        <button id={{ option.choice_id }} type="button" onclick="givevote(this)"> {{ option.choice }} </button>
+    {% endfor %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf-8">
+        var socket = io();
+        function givevote(elem){
+            const urlParams = new URLSearchParams(window.location.search);
+            const poll_id = urlParams.get('poll_id');
+
+            socket.emit('givevote',{'choice_id': elem.id,'poll_id' : poll_id });
+        }
+
+        socket.on('connect',() => {
+            console.log('connected');
+            const urlParams = new URLSearchParams(window.location.search);
+            const poll_id = urlParams.get('poll_id');
+            socket.emit('joinRoom',{'poll_id' : poll_id});
+        });
+
+        socket.on('updateVote',(data) => {
+            var row = document.getElementById('result').rows.namedItem(data['choice_id']);
+            row = document.getElementById('result').rows.namedItem(data['choice_id'])
+            if(row != null)
+                row.cells[1].innerHTML = data['vote'];
+        });
+
+        socket.on('showError',(err) => {
+            document.getElementById('errMsg').innerHTML = err['errMsg']
+        })
+
+    </script>
+
+    
+		
+    <h3>Result: </h3>
+    <table id='result'>
+        <thead>
+        <tr>
+            <th>Options</th>
+            <th>Result</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for option in options %}
+            <tr id={{ option.choice_id }} >
+                <td>{{ option.choice }}</td>
+                <td>{{ option.vote }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+   </body>
+</html>

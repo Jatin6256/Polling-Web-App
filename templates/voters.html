@@ -1,0 +1,25 @@
+<html>
+   <head>
+   <title> Polling app </title>
+   </head>
+    <body>
+    <h3> Voters : </h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>email</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for voter in poll_voters %}
+            <tr >
+                <td>{{ voter.voter_name }}</td>
+                <td>{{ voter.voter_email }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </body>
+</html>
