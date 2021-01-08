@@ -30,6 +30,7 @@ It is polling web application made with flask.
 
  Try by giving vote to sample poll created by me
  <a href='https://secretpollingapp.herokuapp.com/giveVote/?poll_id=251305'> Click me!! Poll Id = 251305 </a>
+ or Try the link in release
 
 If you want to run this app localy :
 
